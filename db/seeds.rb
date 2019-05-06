@@ -55,7 +55,7 @@ Session.create!(
     )
 Session.create!(
     title: 'test session2',
-    user_id: 2
+    user_id: 1
     )
 Session.create!(
     title: 'test session3',
@@ -63,7 +63,15 @@ Session.create!(
     )
 Session.create!(
     title: 'test session4',
-    user_id: 4
+    user_id: 5
+    )
+Session.create!(
+    title: 'test session5',
+    user_id: 5
+    )
+Session.create!(
+    title: 'test session6',
+    user_id: 6
     )
 
 #  Seed examples for AudioFile
@@ -74,13 +82,21 @@ AudioFile.create!(
     )
 AudioFile.create!(
     filename: '2.wav',
-    session_id: 2
+    session_id: 1
     )
 AudioFile.create!(
     filename: '3.wav',
-    session_id: 3
+    session_id: 1
     )
 AudioFile.create!(
     filename: '4.wav',
     session_id: 4
+    )
+AudioFile.create!(
+    filename: '5.wav',
+    session_id: 5
+    )
+AudioFile.create!(
+    filename: '6.wav',
+    session_id: 6
     )
