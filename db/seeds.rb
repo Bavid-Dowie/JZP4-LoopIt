@@ -45,7 +45,7 @@ User.create!(
     password: 'password'
     )
     
-puts "#{User.count} users created!"
+# puts "#{User.count} users created!"
 
 #  Seed examples for Session
 
