@@ -7,48 +7,80 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Seed examples for User
+
 User.create!(
     name: 'Professor Farnsworth', 
     username: 'Fry', 
     email: 'fry@fry.com', 
-    sessions: 'fry.wav', 
-    password_digest: 'password')
+    password: 'password'
+    )
 User.create!(
     name: 'Bender Rodriguez', 
     username: 'Bender', 
     email: 'benderis@great.com', 
-    sessions: 'bender.wav', 
-    password_digest: 'password')
+    password: 'password'
+    )
 User.create!(
     name: 'Turanga Leela', 
     username: 'oneeye', 
     email: 'one@eye.com', 
-    sessions: 'leela.wav', 
-    password_digest: 'password')
+    password: 'password'
+    )
 User.create!(
     name: 'Zoidberg', 
     username: 'Zoidberg', 
     email: 'zoid@berg.com', 
-    sessions: 'zoidberg.wav', 
-    password_digest: 'password')
+    password: 'password'
+    )
 User.create!(
     name: 'Scruffy', 
     username: 'Mmhmmm', 
     email: 'yup@yup.com', 
-    sessions: 'yup.wav', 
-    password_digest: 'password')
+    password: 'password'
+    )
 User.create!(
     name: 'Nibbler', 
     username: 'Stinky', 
     email: 'dark@matter.com', 
-    sessions: 'nibbler.wav', 
-    password_digest: 'password')
+    password: 'password'
+    )
     
 puts "#{User.count} users created!"
-    
-User.create!(
-    name: 'Nibbler', 
-    username: 'Stinky', 
-    email: 'dark@matter.com', 
-    sessions: 'nibbler.wav', 
-    password_digest: 'password')
+
+#  Seed examples for Session
+
+Session.create!(
+    title: 'test session1',
+    user_id: 1
+    )
+Session.create!(
+    title: 'test session2',
+    user_id: 2
+    )
+Session.create!(
+    title: 'test session3',
+    user_id: 3
+    )
+Session.create!(
+    title: 'test session4',
+    user_id: 4
+    )
+
+#  Seed examples for AudioFile
+
+AudioFile.create!(
+    filename: '1.wav',
+    session_id: 1
+    )
+AudioFile.create!(
+    filename: '2.wav',
+    session_id: 2
+    )
+AudioFile.create!(
+    filename: '3.wav',
+    session_id: 3
+    )
+AudioFile.create!(
+    filename: '4.wav',
+    session_id: 4
+    )

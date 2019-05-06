@@ -1,3 +1,3 @@
-class Audio < ApplicationRecord
-  belongs_to_many :sessions
+class AudioFile < ApplicationRecord
+  belongs_to :session
 end

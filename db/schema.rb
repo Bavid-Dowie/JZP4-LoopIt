@@ -10,25 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_05_170227) do
+ActiveRecord::Schema.define(version: 2019_05_06_142046) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "audios", force: :cascade do |t|
+  create_table "audio_files", force: :cascade do |t|
     t.string "filename"
     t.bigint "session_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["session_id"], name: "index_audios_on_session_id"
+    t.index ["session_id"], name: "index_audio_files_on_session_id"
   end
 
   create_table "sessions", force: :cascade do |t|
     t.string "title"
-    t.string "audio_files"
     t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
@@ -36,12 +31,9 @@ ActiveRecord::Schema.define(version: 2019_05_05_170227) do
     t.string "name"
     t.string "username"
     t.string "email"
-    t.string "sessions"
     t.string "password_digest"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "audios", "sessions"
+  add_foreign_key "audio_files", "sessions"
   add_foreign_key "sessions", "users"
 end

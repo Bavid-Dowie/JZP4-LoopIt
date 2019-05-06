@@ -1,47 +1,47 @@
-class AudiosController < ApplicationController
+class AudioFilesController < ApplicationController
   before_action :set_audio, only: [:show, :update, :destroy]
 
-  # GET /audios
+  # GET /audio_files
   def index
-    @audios = Audio.all
+    @audio_file = AudioFile.all
 
-    render json: @audios
+    render json: @audio_file
   end
 
-  # GET /audios/1
+  # GET /audio_files/1
   def show
-    render json: @audio
+    render json: @audio_file
   end
 
-  # POST /audios
+  # POST /audio_files
   def create
-    @audio = Audio.new(audio_params)
+    @audio_file = Audio.new(audio_params)
 
-    if @audio.save
-      render json: @audio, status: :created, location: @audio
+    if @audio_file.save
+      render json: @audio_file, status: :created, location: @audio_file
     else
       render json: @audio.errors, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /audios/1
+  # PATCH/PUT /audio_files/1
   def update
-    if @audio.update(audio_params)
-      render json: @audio
+    if @audio_file.update(audio_params)
+      render json: @audio_file
     else
       render json: @audio.errors, status: :unprocessable_entity
     end
   end
 
-  # DELETE /audios/1
+  # DELETE /audio_files/1
   def destroy
-    @audio.destroy
+    @audio_file.destroy
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_audio
-      @audio = Audio.find(params[:id])
+      @audio_file = AudioFile.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
