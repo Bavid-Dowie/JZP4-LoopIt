@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { BrowserRouter as Switch, Route, Redirect, Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
+import { loginUser, registerUser } from './services/api-helper'
+// import AuthForm from './components/AuthForm'
+import decode from 'jwt-decode'
 import Homepage from './components/Homepage'
 import Session from './components/Session'
 import Sessions from './components/Sessions'
 import UserProfile from './components/UserProfile'
 import CreateUser from './components/CreateUser'
-import decode from 'jwt-decode'
-import axios from 'axios'
 
 import './App.css'
 
@@ -18,43 +19,66 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      userObject: null,
+      currentUser: null,
       password: "",
       sessions: "",
       userSessions: [],
-      audioFiles: ""
+      audioFiles: "",
+      createForm: {
+        email: '',
+        password: ''
+      }
     }
     this.decodeToken = this.decodeToken.bind(this)
-    this.loginChange = this.loginChange.bind(this)
+    this.handleAuthChange = this.handleAuthChange.bind(this)
+    this.handleRegister = this.handleRegister.bind(this);
     this.getSessions = this.getSessions.bind(this)
     this.renderSessions = this.renderSessions.bind(this)
+    this.handleLogin = this.handleLogin.bind(this);
+    this.handleLogout = this.handleLogout.bind(this)
   }
-
+// userData.id to test with front end CRUD
   decodeToken(token) {
     const userData = decode(token)
     this.setState({
-      userObject: userData
+      userObject: userData.id
     })
   }
 
-  loginChange(e) {
-    const { name, value } = e.target
-    this.setState({ [name]: value })
+  componentDidMount() {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      const userData = decode(token);
+      this.setState({
+        currentUser: userData
+      })
+    }
   }
 
-  async handleLoginSubmit() {
-    try {
-      const resp = await axios.post(`https://localhost:3000/users/login`, {
-        username: this.state.username,
-        password: this.state.password
-      })
-      localStorage.setItem('jwt', resp.data.token)
-      this.decodeToken(resp.data.token)
-    } catch (error) {
-      console.log(error)
-      alert("Invalid credentials try again")
-      this.setState({ username: "", password: "" })
-    }
+  handleAuthChange(e) {
+    const { name, value } = e.target;
+    this.setState(prevState => (
+      {
+        createForm: {
+          ...prevState.createForm,
+          [name]: value
+        }
+      }
+    ))
+  }
+
+  async handleRegister() {
+    await registerUser(this.state.createForm);
+    this.handleLogin();
+  }
+
+  async handleLogin() {
+    const token = await loginUser(this.state.createForm)
+    const userData = decode(token.jwt);
+    this.setState({
+      currentUser: userData
+    })
+    localStorage.setItem("jwt", token.jwt)
   }
 
   getSessions() {
@@ -63,17 +87,8 @@ class App extends Component {
       .then(json => this.setState({ sessions: json }))
   }
 
-  componentDidMount() {
-    this.getSessions()
-    const token = localStorage.getItem('jwt')
-    if (token) {
-      const decodedToken = decode(token)
-      this.setState({ userObject: decodedToken })
-    }
-  }
-
   getUserSessions() {
-    fetch(`${userSessionsURL}${this.state.userObject.id}`)
+    fetch(`${userSessionsURL}${this.state.currentUser.id}`)
       .then(response => response.json())
       .then(data => {
         this.setState({ userSessions: data })
@@ -94,10 +109,10 @@ class App extends Component {
       })
   }
 
-  logOut() {
+  handleLogout() {
     localStorage.removeItem("jwt");
     this.setState({
-      userObject: null
+      currentUser: null
     })
   }
 
@@ -110,8 +125,8 @@ class App extends Component {
             render={(props) =>
               <Homepage
                 handleLoginSubmit={this.handleLoginSubmit}
-                userObject={this.state.userObject}
-                loginChange={this.loginChange}
+                currentUser={this.state.currentUser}
+                handleAuthChange={this.handleAuthChange}
                 handleLogin={this.handleLogin}
                 handleRegister={this.handleRegister}
                 username={this.state.username}
@@ -125,8 +140,8 @@ class App extends Component {
                 {...props}
                 getUserSessions={this.getUserSessions}
                 renderUserSessions={this.renderUserSessions}
-                userObject={this.state.userObject}
-                logOut={this.logOut}
+                currentUser={this.state.currentUser}
+                handleLogout={this.handleLogout}
               />}
           />
           <Route
@@ -134,14 +149,10 @@ class App extends Component {
             render={() => <Redirect to="/" />}
           />
           <Route
-            exact path='/users'
-            render={() => <Redirect to="/" />}
-          />
-          <Route
             exact path='/sessions/:id'
             render={(props) =>
               <Session
-                userObject={this.state.userObject}
+                currentUser={this.state.currentUser}
                 onSessionDelete={this.onSessionDelete}
                 getSessions={this.getSessions}
                 {...props} />}
@@ -150,7 +161,7 @@ class App extends Component {
             exact path='/sessions/'
             render={(props) =>
               <Sessions
-                userObject={this.state.userObject}
+                currentUser={this.state.currentUser}
                 onSessionDelete={this.onSessionDelete}
                 getSessions={this.getSessions}
                 renderSessions={this.renderSessions}
@@ -158,17 +169,16 @@ class App extends Component {
               />}
           />
           <Route
-            exact path='/create-profile'
+            exact path='/register'
             render={(props) =>
               <CreateUser
                 {...props}
                 decodeToken={this.decodeToken}
-                userObject={this.state.userObject}
+                currentUser={this.state.currentUser}
               />
             }
           />
         </Switch>
-
       </div>
     )
   }
