@@ -15,7 +15,7 @@ class AudioFilesController < ApplicationController
 
   # POST /audio_files
   def create
-    @audio_file = Audio.new(audio_params)
+    @audio_file = AudioFile.new(audio_file_params)
 
     if @audio_file.save
       render json: @audio_file, status: :created, location: @audio_file
@@ -26,7 +26,7 @@ class AudioFilesController < ApplicationController
 
   # PATCH/PUT /audio_files/1
   def update
-    if @audio_file.update(audio_params)
+    if @audio_file.update(audio_file_params)
       render json: @audio_file
     else
       render json: @audio.errors, status: :unprocessable_entity
@@ -45,7 +45,7 @@ class AudioFilesController < ApplicationController
     end
 
     # Only allow a trusted parameter "white list" through.
-    def audio_params
+    def audio_file_params
       params.require(:audio).permit(:filename, :session_id)
     end
 end
