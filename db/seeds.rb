@@ -13,37 +13,37 @@ User.create!(
     username: 'Fry', 
     email: 'fry@fry.com', 
     password: 'password'
-    )
+  )
 User.create!(
     name: 'Bender Rodriguez', 
     username: 'Bender', 
     email: 'benderis@great.com', 
     password: 'password'
-    )
+  )
 User.create!(
     name: 'Turanga Leela', 
     username: 'oneeye', 
     email: 'one@eye.com', 
     password: 'password'
-    )
+  )
 User.create!(
     name: 'Zoidberg', 
     username: 'Zoidberg', 
     email: 'zoid@berg.com', 
     password: 'password'
-    )
+  )
 User.create!(
     name: 'Scruffy', 
     username: 'Mmhmmm', 
     email: 'yup@yup.com', 
     password: 'password'
-    )
+  )
 User.create!(
     name: 'Nibbler', 
     username: 'Stinky', 
     email: 'dark@matter.com', 
     password: 'password'
-    )
+  )
     
 # puts "#{User.count} users created!"
 
