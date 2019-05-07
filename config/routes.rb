@@ -5,8 +5,8 @@ Rails.application.routes.draw do
     resources :sessions
     resources :audio_files
     resources :users do
-    resources :sessions do
-      resources :audio_files
+      resources :sessions do
+        resources :audio_files
+      end
     end
   end
-end

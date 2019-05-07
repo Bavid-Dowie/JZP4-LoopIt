@@ -11,7 +11,8 @@ export default class CreateUser extends Component {
       email: "",
       password: "",
       username: "",
-      bio: ""
+      bio: "",
+      photo: ""
     }
     this.onUserCreate = this.onUserCreate.bind(this)
     this.onUserSubmit = this.onUserSubmit.bind(this)
@@ -32,6 +33,7 @@ export default class CreateUser extends Component {
       username: this.state.username,
       password: this.state.password,
       bio: this.state.bio,
+      photo: this.state.photo
     }
 
     localStorage.setItem('userInfo', JSON.stringify(data))
@@ -58,7 +60,7 @@ export default class CreateUser extends Component {
           <div className="register__title">Register</div>
           <form onSubmit={this.onUserSubmit} className="register__form" id="userProfile">
             <div className="register__field">
-              <label htmlFor="name" className="register__field-label">name </label>
+              <label htmlFor="name" className="register__field-label">name: </label>
               <input onChange={this.onUserCreate}
                 className="register__field-input"
                 type="text"
@@ -68,7 +70,7 @@ export default class CreateUser extends Component {
               />
             </div>
             <div className="register__field">
-              <label htmlFor="email" className="register__field-label">email </label>
+              <label htmlFor="email" className="register__field-label">email: </label>
               <input onChange={this.onUserCreate}
                 className="register__field-input"
                 type="text"
@@ -78,7 +80,7 @@ export default class CreateUser extends Component {
               />
             </div>
             <div className="register__field">
-              <label htmlFor="username" className="register__field-label">username </label>
+              <label htmlFor="username" className="register__field-label">username: </label>
               <input onChange={this.onUserCreate}
                 className="register__field-input"
                 type="text"
@@ -88,7 +90,7 @@ export default class CreateUser extends Component {
               />
             </div>
             <div className="register__field">
-              <label htmlFor="password" className="register__field-label">password </label>
+              <label htmlFor="password" className="register__field-label">password: </label>
               <input onChange={this.onUserCreate}
                 className="register__field-input"
                 type="password"
@@ -98,7 +100,7 @@ export default class CreateUser extends Component {
               />
             </div>
             <div className="register__field">
-              <label htmlFor="bio" className="register__field-label">bio </label>
+              <label htmlFor="bio" className="register__field-label">bio: </label>
               <input onChange={this.onUserCreate}
                 className="register__field-input"
                 type="text"
@@ -108,7 +110,7 @@ export default class CreateUser extends Component {
               />
             </div>
             <div className="register__field">
-              <label htmlFor="photo" className="register__field-label">photo </label>
+              <label htmlFor="photo" className="register__field-label">photo: </label>
               <input onChange={this.onUserCreate}
                 className="register__field-input"
                 type="text"
