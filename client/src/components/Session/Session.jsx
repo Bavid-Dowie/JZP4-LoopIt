@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import from './Session.css'
 
 class Session extends Component { 
   constructor(props) {
