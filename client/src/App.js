@@ -158,15 +158,16 @@ class App extends Component {
   }
 
   async handleLogin() {
-    const userData = await loginUser(this.state.loginFormData)
-    const token = decode(userData.token);
+    const response = await loginUser(this.state.authFormData)
+    const userData = decode(response.token);
     this.setState({
-      currentUser: token
+      currentUser: userData
     })
-    localStorage.setItem("jwt", token)
+    localStorage.setItem("jwt", response.token)
   }
 
-  async handleRegister() {
+  async handleRegister(ev) {
+    ev.preventDefault();
     await registerUser(this.state.authFormData);
     this.handleLogin();
   }
@@ -212,8 +213,8 @@ class App extends Component {
             render={(props) => (
         <Login
             handleLogin={this.handleLogin}
-            handleChange={this.loginHandleChange}
-            formData={this.state.loginFormData} />)} />
+            handleChange={this.authHandleChange}
+            formData={this.state.authFormData} />)} />
         <Route 
             exact path="/register" 
             render={(props) => (
