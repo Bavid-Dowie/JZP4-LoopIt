@@ -5,7 +5,7 @@ class Header extends Component {
   render() {
     return (
       <div>
-        <h1 onClick={(e) => {
+        <h1 className="header" onClick={(e) => {
           this.props.history.push("/")}}>
           LoopIt
         </h1>

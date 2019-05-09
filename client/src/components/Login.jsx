@@ -18,9 +18,10 @@ const Login = (props) => {
         <input name="password" type="password" value={props.formData.password} onChange={props.handleChange} />
         <hr/>
         <button className="Login-button">Login</button>
-        <button>
-          <Link className="Register-button" to="/register">Register</Link>
-        </button>
+          <Link className="Register-button" to="/register">
+          <button>Register</button>
+          </Link>
+
       </form>
     </div>
   );

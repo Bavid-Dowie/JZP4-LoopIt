@@ -17,13 +17,21 @@ html {
   color: white;
 }
 
+.logregbutton {
+  text-align: right;
+}
+
 h1 {
   color: #2b4b94;
+  background: grey;
+  height: 10vh;
   position: relative;
   font-size: -webkit-xxx-large;
   text-decoration: none;
   transition: color .4s ease-out;
-  padding: 50px;
+  padding: 25px 40px 3px 40px;
+  margin: 0;
+  text-align: left;
 }
 
 h1:after {

@@ -202,7 +202,7 @@ class App extends Component {
               <button onClick={this.handleLogout}>logout</button>
             </>
             :
-            <button onClick={this.handleLoginButton}>Login/register</button>
+            <button className="logregbutton" onClick={this.handleLoginButton}>Login/register</button>
           }
           <PlaySession />
         </div>
