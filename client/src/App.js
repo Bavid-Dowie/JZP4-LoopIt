@@ -207,14 +207,17 @@ class App extends Component {
           <PlaySession />
         </div>
 
-
-        <Route exact path="/login" render={(props) => (
-          <Login
+        <Route 
+            exact path="/login" 
+            render={(props) => (
+        <Login
             handleLogin={this.handleLogin}
             handleChange={this.loginHandleChange}
             formData={this.state.loginFormData} />)} />
-        <Route exact path="/register" render={(props) => (
-          <Register
+        <Route 
+            exact path="/register" 
+            render={(props) => (
+        <Register
             {...props}
             handleRegister={this.handleRegister}
             handleChange={this.authHandleChange}
