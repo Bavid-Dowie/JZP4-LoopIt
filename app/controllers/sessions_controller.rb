@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
-  before_action :set_session, only: %i[show update destroy]
-  before_action :authenticate_user, only: %i[update]
+  before_action :set_session, only: %i[show create destroy]
+
 
   # GET /sessions
   def index
@@ -26,13 +26,13 @@ class SessionsController < ApplicationController
   end
 
   # PATCH/PUT /sessions/1
-  def update
-    if @session.update(session_params)
-      render json: @session
-    else
-      render json: @session.errors, status: :unprocessable_entity
-    end
-  end
+  # def update
+  #   if @session.update(session_params)
+  #     render json: @session
+  #   else
+  #     render json: @session.errors, status: :unprocessable_entity
+  #   end
+  # end
 
   # DELETE /sessions/1
   def destroy
@@ -40,7 +40,7 @@ class SessionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    # Use callbacks to share common setup o=r constraints between actions.
     def set_session
       @session = Session.find(params[:id])
     rescue ActiveRecord::RecordNotFound
