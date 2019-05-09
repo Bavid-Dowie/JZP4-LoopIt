@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3000"
+const baseUrl = "http://loopit-audio-app.herokuapp.com"
 
 export const loginUser = (loginData) => {
   const opts = {
