@@ -1,12 +1,17 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react'
+import { withRouter } from 'react-router'
 
-export default function Header() {
-  return (
-    <div>
-      <Link to="/">
-        <h1>LoopIt</h1>
-      </Link>
-    </div>
-  )
+class Header extends Component {
+  render() {
+    return (
+      <div>
+        <h1 onClick={(e) => {
+          this.props.history.push("/")}}>
+          LoopIt
+        </h1>
+      </div>
+    )
+  }
 }
+
+export default withRouter(Header)

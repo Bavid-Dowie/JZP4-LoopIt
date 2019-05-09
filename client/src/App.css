@@ -1,5 +1,5 @@
 html {
-  background: #fff;
+  background: rgb(44, 187, 163);
 }
 
 .App {
@@ -17,44 +17,40 @@ html {
   color: white;
 }
 
-/* h1 {
-  color: #fff;
-  text-decoration: none;
-}
-
 h1 {
-  color: #2F56B0;
+  color: #2b4b94;
   position: relative;
+  font-size: -webkit-xxx-large;
   text-decoration: none;
   transition: color .4s ease-out;
-}
-
-h1:hover {
-  color: #457DFB;
-  right: 0;
-  text-decoration: none;
-}
-
-h1:hover:after {
-  border-color: #457DFB;
-  right: 0;
+  padding: 50px;
 }
 
 h1:after {
-  border-radius: 1em;
-  border-top: .1em solid #2F56B0;
+  border-radius: .2em;
+  border-top: .08em solid #457DFB;
+  border-bottom: .08em solid #457DFB;
   content: "";
   position: absolute;
-    right: 100%;
-    bottom: .1em;
+    top: .06em;
     left: 0;
+    bottom: .06em;
+    right: 100%;
   transition: right .4s cubic-bezier(0,.5,0,1),
     border-color .4s ease-out;
 }
 
+h1:hover {
+  color: #457dfb;
+  right: 0;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 h1:hover:after {
-  animation: anchor-underline 2s cubic-bezier(0,.5,0,1) infinite;
+  animation: h1-underline 3s cubic-bezier(0,.5,0,1) infinite;
   border-color: #457DFB;
+  right: 0;
 }
 
 @keyframes h1-underline {
@@ -70,4 +66,4 @@ h1:hover:after {
     left: 100%;
     right: 0;
   }
-} */
+}

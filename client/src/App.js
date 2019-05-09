@@ -207,7 +207,6 @@ class App extends Component {
           <PlaySession />
         </div>
 
-
         <Route 
             exact path="/login" 
             render={(props) => (
@@ -226,14 +225,14 @@ class App extends Component {
             decodeToken={this.decodeToken}
             formData={this.state.authFormData} />)} />
         <Route
-            exact path='/users/:username'
-            render={(props) =>
+          exact path='/users/:username'
+          render={(props) =>
             <UserProfile
-            {...props}
-            getUserSessions={this.getUserSessions}
-            renderUserSessions={this.renderUserSessions}
-            currentUser={this.state.currentUser}
-            handleLogout={this.handleLogout}
+              {...props}
+              getUserSessions={this.getUserSessions}
+              renderUserSessions={this.renderUserSessions}
+              currentUser={this.state.currentUser}
+              handleLogout={this.handleLogout}
             />}
         />
         <Route

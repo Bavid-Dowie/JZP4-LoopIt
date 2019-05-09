@@ -1,5 +1,5 @@
 class AudioFilesController < ApplicationController
-  before_action :set_audio, only: [:show, :update, :destroy]
+  before_action :set_audio_file, only: %i[create show destroy]
 
   # GET /audio_files
   def index
@@ -25,13 +25,13 @@ class AudioFilesController < ApplicationController
   end
 
   # PATCH/PUT /audio_files/1
-  def update
-    if @audio_file.update(audio_file_params)
-      render json: @audio_file
-    else
-      render json: @audio.errors, status: :unprocessable_entity
-    end
-  end
+  # def update
+  #   if @audio_file.update(audio_file_params)
+  #     render json: @audio_file
+  #   else
+  #     render json: @audio.errors, status: :unprocessable_entity
+  #   end
+  # end
 
   # DELETE /audio_files/1
   def destroy
@@ -46,6 +46,6 @@ class AudioFilesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def audio_file_params
-      params.require(:audio).permit(:filename, :session_id)
+      params.require(:audio_file).permit(:filename, :session_id)
     end
 end
