@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3000"
+const baseUrl = "loopy-loops.surge.sh"
 
 export const loginUser = (loginData) => {
   const opts = {
