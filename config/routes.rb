@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     post 'authenticate', to: 'authentication#authenticate'
     post 'user_token' => 'user_token#create'
     get 'users/new', to: 'users#create'
+    
     resources :sessions
     resources :audio_files
     resources :users do
