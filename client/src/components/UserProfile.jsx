@@ -1,41 +1,31 @@
 import React, { Component } from 'react'
+// import CreateSession from './CreateSession'
+import { Link, Redirect } from 'react-router-dom'
 
 class UserProfile extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      hasError: false,
-    };
-  }
-
-  componentWillMount = () => {
-    console.log('UserProfile will mount');
-  }
 
   componentDidMount = () => {
-    console.log('UserProfile mounted');
+
   }
 
-  componentWillReceiveProps = (nextProps) => {
-    console.log('UserProfile will receive props', nextProps);
-  }
-
-  componentWillUpdate = (nextProps, nextState) => {
-    console.log('UserProfile will update', nextProps, nextState);
-  }
-
-  componentDidUpdate = () => {
-    console.log('UserProfile did update');
-  }
-
-  componentWillUnmount = () => {
-    console.log('UserProfile will unmount');
-  }
   render() {
+    if (this.props.userObject === null) {
+      return <Redirect to='/' />
+    }
     return (
-      <div>
-        <h1>There should be some stuff here</h1>
+      <div className="userprofile__body">
+        <h3>`Welcome {this.props.user}`</h3>
+        <div>
+          <form onSubmit={this.props.handleUpdateSubmit}>
+            <p>Name:</p>
+            <input onChange={this.props.handleUpdateForm} name="name" type="text" />
+            <p>Username:</p>
+            <input onChange={this.props.handleUpdateForm} name="username" type="text" />
+            <hr />
+            <button>Update</button>
+          </form>
+        </div>
+        <button onClick={() => { this.props.deleteUser(this.props.match.params.id) }}>Delete Profile</button>
       </div>
     )
   }

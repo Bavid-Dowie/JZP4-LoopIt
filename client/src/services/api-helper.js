@@ -27,45 +27,32 @@ export const registerUser = (registerData) => {
     .catch(e => e)
 }
 
-const createSession = (data) => {
-  const opts = {
-    method: 'POST',
-    body: JSON.stringify({ session: data }),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }
-  return fetch(`${baseUrl}/sessions`, opts)
-    .then(resp => resp.json())
-}
-
 const readSessions = () => {
   return fetch(`${baseUrl}/sessions`)
     .then(resp => resp.json())
 }
 
-const updateSession = (id, data) => {
+const updateUser = (id, data) => {
   const opts = {
     method: 'PUT',
-    body: JSON.stringify({ session: data }),
+    body: JSON.stringify({ user: data }),
     headers: {
       'Content-Type': 'application/json'
     }
   }
-  return fetch(`${baseUrl}/sessions/${id}`, opts)
+  return fetch(`${baseUrl}/users/${id}`, opts)
     .then(resp => resp.json())
 }
 
-const destroySession = (id) => {
+const destroyUser = (id) => {
   const opts = {
     method: 'DELETE'
   }
-  return fetch(`${baseUrl}/sessions/${id}`, opts)
+  return fetch(`${baseUrl}/users/${id}`, opts)
 }
 
 export {
-  createSession,
   readSessions,
-  updateSession,
-  destroySession
+  updateUser,
+  destroyUser
 }

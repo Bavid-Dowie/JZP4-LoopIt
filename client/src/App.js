@@ -4,31 +4,25 @@ import { withRouter } from 'react-router'
 import decode from 'jwt-decode'
 
 import Header from './components/Header'
-import Session from './components/Session'
-import Sessions from './components/Sessions'
 import UserProfile from './components/UserProfile'
 import Register from './components/Register'
 import Login from './components/Login'
+import PlaySession from './components/PlaySession'
 
 import {
   loginUser,
   registerUser,
-  createSession,
-  readSessions,
-  updateSession,
-  destroySession
+  updateUser,
+  destroyUser
 } from './services/api-helper'
 
 import './App.css'
-import PlaySession from './components/PlaySession';
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
       currentUser: null,
-      sessions: [],
-      userSessions: [],
       audioFiles: "",
       photo: "",
       authFormData: {
@@ -41,121 +35,52 @@ class App extends Component {
         username: "",
         password: ""
       },
-      sessionForm: {
-        title: "",
-        audio_files: ""
+      editFormData:  {
+        name: "",
+        username: ""
       }
     }
     this.decodeToken = this.decodeToken.bind(this)
     this.authHandleChange = this.authHandleChange.bind(this)
-    this.loginHandleChange = this.loginHandleChange.bind(this)
     this.handleRegister = this.handleRegister.bind(this)
     this.handleLoginButton = this.handleLoginButton.bind(this)
+    this.handleUpdateForm = this.handleUpdateForm.bind(this)
+    this.handleUpdateSubmit = this.handleUpdateSubmit.bind(this)
     this.handleLogin = this.handleLogin.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
-    this.getSessions = this.getSessions.bind(this)
-    this.newSession = this.newSession.bind(this)
-    this.editSession = this.editSession.bind(this)
-    this.deleteSession = this.deleteSession.bind(this)
+    this.deleteUser = this.deleteUser.bind(this)
   }
-  // userData.id to test with front end CRUD
 
   decodeToken(token) {
     const userData = decode(token)
     this.setState({
       currentUser: userData.id
     })
-    console.table(userData.id)
   }
 
-  componentDidMount() {
-    this.getSessions()
-    const checkUser = localStorage.getItem("jwt");
-    if (checkUser) {
-      const user = decode(checkUser);
-      this.setState({
-        currentUser: user
-      })
+    componentDidMount() {
+      // this.getSessions()
+      const checkUser = localStorage.getItem("jwt");
+      if (checkUser) {
+        const user = decode(checkUser);
+        this.setState({
+          currentUser: user
+        })
+      }
     }
-  }
-
-  async getSessions() {
-    const sessions = await readSessions();
-    this.setState({
-      sessions
-    })
-  }
-
-  async newSession(e) {
-    e.preventDefault();
-    const session = await createSession(this.state.sessionForm);
-    this.setState(prevState => ({
-      sessions: [...prevState.sessions, session],
-      sessionForm: {
-        title: "",
-        audio_files: ""
-      }
-    }))
-  }
-
-  async editSession() {
-    const { sessionForm } = this.state
-    await updateSession(sessionForm.id, sessionForm);
-    this.setState(prevState => (
-      {
-        sessions: prevState.sessions.map(
-          session => session.id
-            ===
-            sessionForm.id
-            ?
-            sessionForm
-            :
-            session
-        ),
-      }
-    ))
-  }
-
-  async deleteSession(id) {
-    await destroySession(id);
-    this.setState(prevState => ({
-      sessions: prevState.sessions.filter(session => session.id !== id)
-    }))
-  }
-  // update to handleSessionChange
-  handleSessionChange(e) {
-    const { name, value } = e.target;
-    this.setState(prevState => ({
-      sessionForm: {
-        ...prevState.sessionForm,
-        [name]: value
-      }
-    }))
-  }
-
-  async mountEditForm(id) {
-    const sessions = await readSessions();
-    const session = sessions.find(el => el.id === parseInt(id));
-    this.setState({
-      sessionForm: session
-    });
-  }
 
   handleLoginButton() {
     this.props.history.push("/login")
   }
 
-  loginHandleChange(e) {
-    const { name, value } = e.target;
-    this.setState(prevState => (
-      {
-        loginFormData: {
-          ...prevState.loginFormData,
-          [name]: value
-        }
-      }
-    ))
+  async deleteUser(id) {
+    await destroyUser(id);
+    this.setState({currentUser: null })
+    localStorage.removeItem("jwt")
+    this.props.history.push("/login")
   }
+
+    // -------------- AUTH ------------------
 
   async handleLogin() {
     const response = await loginUser(this.state.authFormData)
@@ -164,42 +89,59 @@ class App extends Component {
       currentUser: userData
     })
     localStorage.setItem("jwt", response.token)
+    this.props.history.push(`/users/${this.state.currentUser.user_id}`)
   }
 
-  async handleRegister(ev) {
-    ev.preventDefault();
+  async handleRegister(e) {
+    e.preventDefault()
     await registerUser(this.state.authFormData);
-    this.handleLogin();
+    this.handleLogin()
   }
 
-  handleLogout() {
-    localStorage.removeItem("jwt");
-    this.setState({
-      currentUser: null
-    })
-  }
-
-  authHandleChange(e) {
-    const { name, value } = e.target;
-    this.setState(prevState => (
-      {
-        authFormData: {
-          ...prevState.authFormData,
-          [name]: value
-        }
+  async handleUpdateForm(e) {
+    const {name, value} = e.target
+    this.setState(prevState => ({
+      editFormData: {...prevState.editFormData,
+        [name]: value
       }
-    ))
+    }))
   }
+
+  async handleUpdateSubmit(user) {
+    const updatedUser = await updateUser(this.state.currentUser.user_id, this.state.editFormData)
+    this.setState(prevState => ({
+      user: prevState.currentUser.map(el => el.id === this.state.currentUser.user_id ? updatedUser : el)
+    }))
+  }
+  
+    handleLogout() {
+      localStorage.removeItem("jwt");
+      this.setState({
+        currentUser: null
+      })
+    }
+
+  async  authHandleChange(e) {
+      const { name, value } = e.target;
+      this.setState(prevState => (
+        {
+          authFormData: {
+            ...prevState.authFormData,
+            [name]: value
+          }
+        }
+      ))
+    }
 
   render() {
     return (
       <div className="App">
+      <header>
         <Header />
         <div>
           {this.state.currentUser
             ?
             <>
-              <h3>`Welcome {this.state.currentUser.username}`</h3>
               <button onClick={this.handleLogout}>logout</button>
             </>
             :
@@ -207,51 +149,33 @@ class App extends Component {
           }
           <PlaySession />
         </div>
-
-        <Route 
-            exact path="/login" 
-            render={(props) => (
-        <Login
-            handleLogin={this.handleLogin}
-            handleChange={this.authHandleChange}
-            formData={this.state.authFormData} />)} />
-        <Route 
-            exact path="/register" 
-            render={(props) => (
-        <Register
-            {...props}
-            handleRegister={this.handleRegister}
-            handleChange={this.authHandleChange}
-            currentUser={this.state.currentUser}
-            decodeToken={this.decodeToken}
-            formData={this.state.authFormData} />)} />
+        </header>
         <Route
-          exact path='/users/:username'
+          exact path="/login"
+          render={(props) => (
+            <Login
+              handleLogin={this.handleLogin}
+              handleChange={this.authHandleChange}
+              formData={this.state.authFormData} />)} />
+        <Route
+          exact path="/register"
+          render={(props) => (
+            <Register
+              {...props}
+              handleRegister={this.handleRegister}
+              handleChange={this.authHandleChange}
+              currentUser={this.state.currentUser}
+              decodeToken={this.decodeToken}
+              formData={this.state.authFormData} />)} />
+        <Route
+          exact path='/users/:id'
           render={(props) =>
             <UserProfile
               {...props}
-              getUserSessions={this.getUserSessions}
-              renderUserSessions={this.renderUserSessions}
               currentUser={this.state.currentUser}
-              handleLogout={this.handleLogout}
-            />}
-        />
-        <Route
-          exact path='/sessions/:id'
-          render={(props) =>
-            <Session
-              currentUser={this.state.currentUser}
-              onSessionDelete={this.onSessionDelete}
-              {...props} />}
-        />
-        <Route
-          exact path='/sessions/'
-          render={(props) =>
-            <Sessions
-              currentUser={this.state.currentUser}
-              onSessionDelete={this.onSessionDelete}
-              renderSessions={this.renderSessions}
-              {...props}
+              deleteUser={this.deleteUser}
+              handleUpdateForm={this.handleUpdateForm}
+              handleUpdateSubmit={this.handleUpdateSubmit}
             />}
         />
 
