@@ -8,7 +8,7 @@ export default class PlaySession extends Component {
       <div className='react-player'>
         <ReactPlayer
           url='https://www.youtube.com/watch?v=ysz5S6PUM-U'
-          playing
+          onPause
           width='100%'
           height='100%'
           margin-top='10%'

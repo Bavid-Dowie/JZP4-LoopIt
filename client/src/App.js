@@ -35,7 +35,7 @@ class App extends Component {
         username: "",
         password: ""
       },
-      editFormData:  {
+      editFormData: {
         name: "",
         username: ""
       }
@@ -58,29 +58,46 @@ class App extends Component {
     })
   }
 
-    componentDidMount() {
-      // this.getSessions()
-      const checkUser = localStorage.getItem("jwt");
-      if (checkUser) {
-        const user = decode(checkUser);
-        this.setState({
-          currentUser: user
-        })
-      }
+  componentDidMount() {
+    // this.getSessions()
+    const checkUser = localStorage.getItem("jwt");
+    if (checkUser) {
+      const user = decode(checkUser);
+      this.setState({
+        currentUser: user
+      })
     }
+  }
 
-  handleLoginButton() {
-    this.props.history.push("/login")
+  async handleUpdateForm(e) {
+    const { name, value } = e.target
+    this.setState(prevState => ({
+      editFormData: {
+        ...prevState.editFormData,
+        [name]: value
+      }
+    }))
+  }
+
+  async handleUpdateSubmit(user) {
+    const updatedUser = await updateUser(this.state.currentUser.user_id, this.state.editFormData)
+    this.setState(prevState => ({
+      user: prevState.currentUser.map(el => el.id === this.state.currentUser.user_id ? updatedUser : el)
+    }))
   }
 
   async deleteUser(id) {
     await destroyUser(id);
-    this.setState({currentUser: null })
+    this.setState({ currentUser: null })
     localStorage.removeItem("jwt")
     this.props.history.push("/login")
   }
 
-    // -------------- AUTH ------------------
+  // -------------- AUTH ------------------
+
+  handleLoginButton() {
+    this.props.history.push("/login")
+  }
 
   async handleLogin() {
     const response = await loginUser(this.state.authFormData)
@@ -98,57 +115,41 @@ class App extends Component {
     this.handleLogin()
   }
 
-  async handleUpdateForm(e) {
-    const {name, value} = e.target
-    this.setState(prevState => ({
-      editFormData: {...prevState.editFormData,
-        [name]: value
-      }
-    }))
+  handleLogout() {
+    localStorage.removeItem("jwt");
+    this.setState({
+      currentUser: null
+    })
   }
-
-  async handleUpdateSubmit(user) {
-    const updatedUser = await updateUser(this.state.currentUser.user_id, this.state.editFormData)
-    this.setState(prevState => ({
-      user: prevState.currentUser.map(el => el.id === this.state.currentUser.user_id ? updatedUser : el)
-    }))
-  }
-  
-    handleLogout() {
-      localStorage.removeItem("jwt");
-      this.setState({
-        currentUser: null
-      })
-    }
 
   async  authHandleChange(e) {
-      const { name, value } = e.target;
-      this.setState(prevState => (
-        {
-          authFormData: {
-            ...prevState.authFormData,
-            [name]: value
-          }
+    const { name, value } = e.target;
+    this.setState(prevState => (
+      {
+        authFormData: {
+          ...prevState.authFormData,
+          [name]: value
         }
-      ))
-    }
+      }
+    ))
+  }
 
   render() {
     return (
       <div className="App">
-      <header>
-        <Header />
-        <div>
-          {this.state.currentUser
-            ?
-            <>
-              <button onClick={this.handleLogout}>logout</button>
-            </>
-            :
-            <button className="logregbutton" onClick={this.handleLoginButton}>Login/register</button>
-          }
-          <PlaySession />
-        </div>
+        <header>
+          <Header />
+          <div>
+            {this.state.currentUser
+              ?
+              <>
+                <button onClick={this.handleLogout}>logout</button>
+              </>
+              :
+              <button className="logregbutton" onClick={this.handleLoginButton}>Login/register</button>
+            }
+            <PlaySession />
+          </div>
         </header>
         <Route
           exact path="/login"
@@ -176,6 +177,7 @@ class App extends Component {
               deleteUser={this.deleteUser}
               handleUpdateForm={this.handleUpdateForm}
               handleUpdateSubmit={this.handleUpdateSubmit}
+              user={this.state.currentUser.username}
             />}
         />
 

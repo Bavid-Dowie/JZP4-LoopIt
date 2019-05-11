@@ -36,11 +36,11 @@ h1 {
 
 h1:after {
   border-radius: .2em;
-  border-top: .08em solid #457DFB;
+  border-top: .58em solid #457DFB;
   border-bottom: .08em solid #457DFB;
   content: "";
   position: absolute;
-    top: .06em;
+    top: .46em;
     left: 0;
     bottom: .06em;
     right: 100%;

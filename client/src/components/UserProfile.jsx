@@ -4,10 +4,6 @@ import { Link, Redirect } from 'react-router-dom'
 
 class UserProfile extends Component {
 
-  componentDidMount = () => {
-
-  }
-
   render() {
     if (this.props.userObject === null) {
       return <Redirect to='/' />
@@ -24,8 +20,8 @@ class UserProfile extends Component {
             <hr />
             <button>Update</button>
           </form>
-        </div>
         <button onClick={() => { this.props.deleteUser(this.props.match.params.id) }}>Delete Profile</button>
+        </div>
       </div>
     )
   }
