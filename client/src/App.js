@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
+import { Link, Route } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import decode from 'jwt-decode'
 
@@ -79,7 +79,7 @@ class App extends Component {
     }))
   }
 
-  async handleUpdateSubmit(user) {
+  async handleUpdateSubmit() {
     const updatedUser = await updateUser(this.state.currentUser.user_id, this.state.editFormData)
     this.setState(prevState => ({
       user: prevState.currentUser.map(el => el.id === this.state.currentUser.user_id ? updatedUser : el)
@@ -88,7 +88,9 @@ class App extends Component {
 
   async deleteUser(id) {
     await destroyUser(id);
-    this.setState({ currentUser: null })
+    this.setState({
+      currentUser: null
+    })
     localStorage.removeItem("jwt")
     this.props.history.push("/login")
   }
@@ -143,12 +145,15 @@ class App extends Component {
             {this.state.currentUser
               ?
               <>
-                <button onClick={this.handleLogout}>logout</button>
+                <Link to={'users/:username'}>
+                  <button id="buttonclick">Profile</button>
+                </Link>
+                <hr/>
+                <button id="buttonclick" onClick={this.handleLogout}>logout</button>
               </>
               :
-              <button className="logregbutton" onClick={this.handleLoginButton}>Login/register</button>
+              <button id="buttonclick" className="logregbutton" onClick={this.handleLoginButton}>Login/register</button>
             }
-            <PlaySession />
           </div>
         </header>
         <Route
@@ -169,18 +174,19 @@ class App extends Component {
               decodeToken={this.decodeToken}
               formData={this.state.authFormData} />)} />
         <Route
-          exact path='/users/:id'
+          exact path='/users/:username'
           render={(props) =>
             <UserProfile
               {...props}
               currentUser={this.state.currentUser}
+              handleLogout={this.state.handleLogout}
               deleteUser={this.deleteUser}
               handleUpdateForm={this.handleUpdateForm}
               handleUpdateSubmit={this.handleUpdateSubmit}
-              user={this.state.currentUser.username}
+              user={this.username}
             />}
         />
-
+        <PlaySession />
       </div>
     )
   }

@@ -1,77 +1,70 @@
 html {
-  background: rgb(44, 187, 163);
+  background: #00C0A3;
 }
 
 .App {
   text-align: center;
+  font-size: 3em;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+button {
+  transition: 1s;
+  font-family: 'Amatic SC', cursive;
+  font-size: 1em;
+  text-align: center;
+  border: 1px solid;
+  padding: 10px;
+  box-shadow: 4px 4px 14px 4px #003c31;
+  border-radius: .15em;
+  height: 2em;
+  width: 6em;
+  background: #00896F;
   color: white;
+  border: none;
+  margin: 3%;
 }
 
-.logregbutton {
-  text-align: right;
-}
-
-h1 {
-  color: #2b4b94;
-  background: white;
-  height: 10vh;
-  position: relative;
-  font-size: -webkit-xxx-large;
-  text-decoration: none;
-  transition: color .4s ease-out;
-  padding: 25px 40px 3px 40px;
-  margin: 0;
-  text-align: left;
-}
-
-h1:after {
-  border-radius: .2em;
-  border-top: .58em solid #457DFB;
-  border-bottom: .08em solid #457DFB;
-  content: "";
-  position: absolute;
-    top: .46em;
-    left: 0;
-    bottom: .06em;
-    right: 100%;
-  transition: right .4s cubic-bezier(0,.5,0,1),
-    border-color .4s ease-out;
-}
-
-h1:hover {
-  color: #457dfb;
-  right: 0;
-  text-decoration: none;
+button:hover, button:focus {
+  transition: 1s;
+  height:2.1em;
+  width: 6.1em;
+  background: #026150;
   cursor: pointer;
+  outline: 0;
+  border: none;
+  -moz-outline-style: none;
 }
 
-h1:hover:after {
-  animation: h1-underline 3s cubic-bezier(0,.5,0,1) infinite;
-  border-color: #457DFB;
+button:active {
+  background-color: #026150;
+  box-shadow: 0 5px #003c31;
+  transform: translateY(5px);
+  outline: 0;
+  border: none;
+  -moz-outline-style: none;
+}
+
+/* #buttonclick span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+#buttonclick span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+#buttonclick:hover span {
+  padding-right: 25px;
+}
+
+#buttonclick:hover span:after {
+  opacity: 1;
   right: 0;
-}
-
-@keyframes h1-underline {
-  0%, 10% {
-    left: 0;
-    right: 100%;
-  }
-  40%, 60% {
-    left: 0;
-    right: 0;
-  }
-  90%, 100% {
-    left: 100%;
-    right: 0;
-  }
-}
+} */
