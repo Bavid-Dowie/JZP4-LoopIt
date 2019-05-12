@@ -1,10 +1,18 @@
 .Register-button {
   text-decoration: none;
-  color: black;
+  /* color: black; */
 }
 
 h2 {
   text-transform: capitalize;
   margin: 0%;
   padding: 0%;
+}
+
+.login-line-top {
+  margin-bottom: 1.5em;
+}
+
+.login-line-bottom {
+  margin-top: 2 em;
 }

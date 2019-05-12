@@ -1,36 +1,34 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router'
 // import CreateSession from './CreateSession'
-import UpdateUserForm from './UpdateUserForm';
+// import UpdateUserForm from './UpdateUserForm';
 import { Link, Redirect } from 'react-router-dom'
+import UpdateUserForm from './UpdateUserForm';
 
 class UserProfile extends Component {
 
   componentDidMount() {
-    // this.props.handleLogin()
+
   }
 
   render() {
     if (this.props.userObject === null) {
       return <Redirect to='/' />
     }
+    let renderUser = this.props.currentUser || {}
+    console.table(this.props.currentUser)
     return (
-      <div className="userprofile__body">
-        <h3>`Welcome {this.username}`</h3>
-        <div>
-          <form onSubmit={this.props.handleUpdateSubmit}>
-            <p>Name:</p>
-            <input onChange={this.props.handleUpdateForm} name="name" type="text" />
-            <p>Username:</p>
-            <input onChange={this.props.handleUpdateForm} name="username" type="text" />
-            <hr />
-            <button>Update</button>
-          </form>
-          <button onClick={() => {
-            this.props.deleteUser(this.props.user_id)
-          }}>Delete Profile</button>
+      <div>
+      <h3 className="welcome">Welcome {renderUser.username}</h3>
+
+      <button className="userprofile-body">
+          <Link onClick={this.props.handleUpdateSubmit}
+                to={UpdateUserForm}
+                className="update-button">
+                Update Profile
+          </Link>
+      </button>
         </div>
-      </div>
     )
   }
 }

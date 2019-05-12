@@ -2,9 +2,18 @@ html {
   background: #00C0A3;
 }
 
+p {
+  margin: .2em auto;
+}
+
 .App {
   text-align: center;
-  font-size: 3em;
+  font-size: 2em;
+}
+
+.welcome {
+  font-size: 2.5em;
+  margin: .5em auto;
 }
 
 button {
@@ -43,28 +52,3 @@ button:active {
   border: none;
   -moz-outline-style: none;
 }
-
-/* #buttonclick span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
-
-#buttonclick span:after {
-  content: '\00bb';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
-}
-
-#buttonclick:hover span {
-  padding-right: 25px;
-}
-
-#buttonclick:hover span:after {
-  opacity: 1;
-  right: 0;
-} */

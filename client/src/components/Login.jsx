@@ -8,7 +8,7 @@ class Login extends Component {
     return (
       <div className="auth-container">
         <h2>login</h2>
-        <hr />
+        <hr className="login-line-top"/>
         <form onSubmit={(e) => {
           e.preventDefault();
           this.props.handleLogin();
@@ -17,7 +17,7 @@ class Login extends Component {
           <input name="username" type="text" value={this.props.formData.username} onChange={this.props.handleChange} />
           <p>Password: </p>
           <input name="password" type="password" value={this.props.formData.password} onChange={this.props.handleChange} />
-          <hr />
+          <hr className="login-line-bottom"/>
           <button className="Login-button">Login</button>
           <Link className="Register-button" to="/register">
             <button>Register</button>

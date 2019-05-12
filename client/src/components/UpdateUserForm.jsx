@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router'
+import "./UpdateUserForm.css"
 
 class UpdateUserForm extends Component {
-
   render(props) {
     return (
       <div>

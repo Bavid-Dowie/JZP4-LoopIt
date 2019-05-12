@@ -7,7 +7,6 @@ import Header from './components/Header'
 import UserProfile from './components/UserProfile'
 import Register from './components/Register'
 import Login from './components/Login'
-import PlaySession from './components/PlaySession'
 
 import {
   loginUser,
@@ -82,7 +81,7 @@ class App extends Component {
   async handleUpdateSubmit() {
     const updatedUser = await updateUser(this.state.currentUser.user_id, this.state.editFormData)
     this.setState(prevState => ({
-      user: prevState.currentUser.map(el => el.id === this.state.currentUser.user_id ? updatedUser : el)
+      user: prevState.currentUser.map(e => e.id === this.state.currentUser.user_id ? updatedUser : e)
     }))
   }
 
@@ -139,23 +138,22 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header>
+
           <Header />
           <div>
             {this.state.currentUser
               ?
               <>
-                <Link to={'users/:username'}>
+                <Link to={`users/@username`}>
                   <button id="buttonclick">Profile</button>
                 </Link>
-                <hr/>
                 <button id="buttonclick" onClick={this.handleLogout}>logout</button>
               </>
               :
-              <button id="buttonclick" className="logregbutton" onClick={this.handleLoginButton}>Login/register</button>
+              <button id="buttonclick" className="log-reg-button" onClick={this.handleLoginButton}>Login/register</button>
             }
           </div>
-        </header>
+
         <Route
           exact path="/login"
           render={(props) => (
@@ -186,7 +184,7 @@ class App extends Component {
               user={this.username}
             />}
         />
-        <PlaySession />
+        {/* <PlaySession /> */}
       </div>
     )
   }
