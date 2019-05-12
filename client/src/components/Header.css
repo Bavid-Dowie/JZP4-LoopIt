@@ -24,7 +24,7 @@ h1:after {
 }
 
 h1:hover {
-  color: #00C0A3;
+  color: rgb(3, 120, 102);
   right: 0;
   text-decoration: none;
   cursor: pointer;
@@ -34,6 +34,11 @@ h1:hover:after {
   animation: h1-underline 3s cubic-bezier(0,.5,0,1) infinite;
   border-color: #16574f;
   right: 0;
+}
+
+.header {
+  font-size: 2em;
+  top: 0;
 }
 
 @keyframes h1-underline {

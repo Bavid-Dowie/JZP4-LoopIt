@@ -17,7 +17,7 @@ class Register extends Component {
           <p>Password:</p>
           <input name="password" type="password" value={this.props.formData.password} onChange={this.props.handleChange} />
           <hr />
-          <button>Register</button>
+          <button className="register-button">Register</button>
         </form>
       </div>
     );

@@ -11,9 +11,9 @@ class PlaySession extends Component {
         <ReactPlayer
           url='https://www.youtube.com/watch?v=ysz5S6PUM-U'
           onPause
-          width='100%'
+          width='50%'
           height='100%'
-          margin-top='10%'
+          padding-top='20%'
           fileConfig={{
             attributes: {
               style: {
