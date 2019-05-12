@@ -1,0 +1,35 @@
+.soundpad-container {
+  background-color: 'green';
+  display: grid;
+  grid-gap: 2em;
+  grid-template: auto/ 1fr 1fr 1fr 1fr 1fr;
+}
+
+.soundpad {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 7em;
+  width: 7em;
+  font-size: 1.5rem;
+  border-radius: 6px;
+  text-transform: uppercase;
+  color: white;
+  background: linear-gradient(to bottom right, #072d1b, #0b6439);
+  box-shadow: 5px 5px #021301;
+  align-self: center;
+  justify-self: center;
+  cursor: pointer;
+  --button-raise-level: 6px;
+  --button-hover-pressure: 1;
+  --transform-speed: 0.1s;
+}
+
+.soundpad:active {
+  background-color: #026150;
+  box-shadow: 0 5px #003c31;
+  transform: translateY(5px);
+  outline: 0;
+  border: none;
+  -moz-outline-style: none;
+}

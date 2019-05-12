@@ -9,6 +9,7 @@ p {
 .App {
   text-align: center;
   font-size: 2em;
+  margin: 0;
 }
 
 .welcome {
@@ -22,7 +23,6 @@ button {
   font-size: 1em;
   text-align: center;
   border: 1px solid;
-  padding: 10px;
   box-shadow: 4px 4px 14px 4px #003c31;
   border-radius: .15em;
   height: 2em;
@@ -31,12 +31,17 @@ button {
   color: white;
   border: none;
   margin: 3%;
+  padding: 10px;
+  --button-raise-level: 6px;
+  --button-hover-pressure: 1;
+  --transform-speed: 0.1s;
 }
 
 button:hover, button:focus {
   transition: 1s;
   height:2.1em;
   width: 6.1em;
+  font-size: 1.5em;
   background: #026150;
   cursor: pointer;
   outline: 0;

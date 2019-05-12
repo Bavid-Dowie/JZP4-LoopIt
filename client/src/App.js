@@ -7,6 +7,8 @@ import Header from './components/Header'
 import UserProfile from './components/UserProfile'
 import Register from './components/Register'
 import Login from './components/Login'
+import SoundPad from '../src/components/PlaySession'
+import Sounds from '../src/Assets/Sounds'
 
 import {
   loginUser,
@@ -37,7 +39,8 @@ class App extends Component {
       editFormData: {
         name: "",
         username: ""
-      }
+      },
+      sounds: Object.keys(Sounds)
     }
     this.decodeToken = this.decodeToken.bind(this)
     this.authHandleChange = this.authHandleChange.bind(this)
@@ -48,6 +51,7 @@ class App extends Component {
     this.handleLogin = this.handleLogin.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
     this.deleteUser = this.deleteUser.bind(this)
+    this.playSound = this.playSound.bind(this)
   }
 
   decodeToken(token) {
@@ -66,6 +70,12 @@ class App extends Component {
         currentUser: user
       })
     }
+  }
+
+  playSound(eventObj) {
+    const currentSound = eventObj.currentTarget.id
+    Sounds[currentSound].currentTime = 0
+    Sounds[currentSound].play()
   }
 
   async handleUpdateForm(e) {
@@ -124,6 +134,7 @@ class App extends Component {
   }
 
   async  authHandleChange(e) {
+    e.preventDefault()
     const { name, value } = e.target;
     this.setState(prevState => (
       {
@@ -136,23 +147,28 @@ class App extends Component {
   }
 
   render() {
+    const soundPad = []
+    for (let i = 0; i < this.state.sounds.length; i++) {
+      soundPad.push(<SoundPad sound={this.state.sounds[i]}
+        playSound={this.playSound} />)
+    }
     return (
       <div className="App">
 
-          <Header />
-          <div>
-            {this.state.currentUser
-              ?
-              <>
-                <Link to={`users/@username`}>
-                  <button id="buttonclick">Profile</button>
-                </Link>
-                <button id="buttonclick" onClick={this.handleLogout}>logout</button>
-              </>
-              :
-              <button id="buttonclick" className="log-reg-button" onClick={this.handleLoginButton}>Login/register</button>
-            }
-          </div>
+        <Header />
+        <div>
+          {this.state.currentUser
+            ?
+            <>
+              <Link to={`users/@username`}>
+                <button id="buttonclick">Profile</button>
+              </Link>
+              <button id="buttonclick" onClick={this.handleLogout}>logout</button>
+            </>
+            :
+            <button id="buttonclick" className="log-reg-button" onClick={this.handleLoginButton}>Login/register</button>
+          }
+        </div>
 
         <Route
           exact path="/login"

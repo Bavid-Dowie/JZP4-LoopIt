@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import './SoundPad.css'
 
-class Button extends Component {
+class SoundPad extends Component {
   render() {
     return (
       <div
-        // Add additional attributes here
-        className='button'
+        className='soundpad'
         onClick={this.props.playSound}
         id={this.props.sound}
       >
@@ -13,8 +13,8 @@ class Button extends Component {
         <p>{this.props.sound}</p>
 
       </div>
-    );
+    )
   }
 }
 
-export default Button;
+export default SoundPad;
