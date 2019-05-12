@@ -6,6 +6,7 @@
     "jwt-decode": "^2.2.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-mic": "^12.4.1",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.0",
     "with-router": "^1.0.1"

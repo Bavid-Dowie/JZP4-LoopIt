@@ -1,7 +1,7 @@
 // const baseUrl = "loopy-loops.surge.sh"
 const baseUrl = "http://localhost:3000"
 
-export const loginUser = (loginData) => {
+const loginUser = (loginData) => {
   console.log('baseURL from api helper: ', baseUrl)
   const opts = {
     method: 'POST',
@@ -10,14 +10,14 @@ export const loginUser = (loginData) => {
       'Content-Type': 'application/json'
     }
   }
-  
+
   return fetch(`${baseUrl}/auth/login`, opts)
   .then(console.log('url in loginUser: ',baseUrl))
   .then(resp => resp.json())
   .catch(e => e)
 }
 
-export const registerUser = (registerData) => {
+const registerUser = (registerData) => {
   const opts = {
     method: 'POST',
     body: JSON.stringify({ user: registerData }),
@@ -49,15 +49,18 @@ const updateUser = (id, data) => {
     .then(resp => resp.json())
 }
 
-const destroyUser = (id) => {
+const destroyUser = (user_id) => {
+  console.log(user_id)
   const opts = {
     method: 'DELETE'
   }
-  return fetch(`${baseUrl}/users/${id}`, opts)
+  return fetch(`${baseUrl}/users/${user_id}`, opts)
 }
 
 export {
+  loginUser,
   readSessions,
+  registerUser,
   updateUser,
   destroyUser
 }

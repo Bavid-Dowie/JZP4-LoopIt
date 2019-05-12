@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import ReactPlayer from 'react-player'
+import { withRouter } from 'react-router'
+
 // import './PlaySession.css'
 
-export default class PlaySession extends Component {
+class PlaySession extends Component {
   render() {
     return (
       <div className='react-player'>
@@ -26,3 +28,5 @@ export default class PlaySession extends Component {
     )
   }
 }
+
+export default withRouter(PlaySession)
