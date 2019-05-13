@@ -14,12 +14,20 @@ class Login extends Component {
           this.props.handleLogin();
         }} >
           <p>Username: </p>
-          <input name="username" type="text" value={this.props.formData.username} onChange={this.props.handleChange} />
+          <input  name="username"
+                  type="text"
+                  value={this.props.formData.username}
+                  onChange={this.props.handleChange}
+                  />
           <p>Password: </p>
-          <input name="password" type="password" value={this.props.formData.password} onChange={this.props.handleChange} />
+          <input  name="password"
+                  type="password"
+                  value={this.props.formData.password}
+                  onChange={this.props.handleChange} />
           <hr className="login-line-bottom"/>
           <button className="Login-button">Login</button>
-          <Link className="Register-button" to="/register">
+          <Link className="Register-button"
+                to="/register">
             <button>Register</button>
           </Link>
         </form>

@@ -24,7 +24,7 @@ h1:after {
 }
 
 h1:hover {
-  color: rgb(3, 120, 102);
+  color: #037866;
   right: 0;
   text-decoration: none;
   cursor: pointer;
@@ -39,6 +39,14 @@ h1:hover:after {
 .header {
   font-size: 2em;
   top: 0;
+}
+
+#container {
+  flex-flow: wrap;
+  display: grid;
+  grid-gap: 3em;
+  grid-template-rows: 4em 4em 4em 4em;
+  grid-template-columns: 4em 4em 4em 4em;
 }
 
 @keyframes h1-underline {

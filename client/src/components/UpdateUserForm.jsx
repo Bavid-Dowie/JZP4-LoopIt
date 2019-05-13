@@ -3,6 +3,12 @@ import { withRouter } from 'react-router'
 import "./UpdateUserForm.css"
 
 class UpdateUserForm extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+
+    }
+  }
   render(props) {
     return (
       <div>

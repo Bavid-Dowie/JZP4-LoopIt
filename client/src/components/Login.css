@@ -1,16 +1,19 @@
-.Register-button {
-
+.register-button {
+  margin-top: 1em;
+  margin-bottom: 1.5em;
 }
 
 h2 {
   text-transform: capitalize;
   font-size: 2.5em;
-  margin: 0%;
+  margin: 0 0 .5em 0;;
   padding: 0%;
 }
 
 .login-line-top {
+  margin-top: 0;
   margin-bottom: 1.5em;
+  padding-top: 0;
 }
 
 .login-line-bottom {

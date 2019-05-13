@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link, Route } from 'react-router-dom'
+import { Link, Route, Switch } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import decode from 'jwt-decode'
 
@@ -7,8 +7,10 @@ import Header from './components/Header'
 import UserProfile from './components/UserProfile'
 import Register from './components/Register'
 import Login from './components/Login'
-import SoundPad from '../src/components/PlaySession'
+import SoundPad from '../src/components/SoundPad'
 import Sounds from '../src/Assets/Sounds'
+// import "react-awesome-button/dist/styles.css"
+
 
 import {
   loginUser,
@@ -43,7 +45,7 @@ class App extends Component {
       sounds: Object.keys(Sounds)
     }
     this.decodeToken = this.decodeToken.bind(this)
-    this.authHandleChange = this.authHandleChange.bind(this)
+    this.handleAuthChange = this.handleAuthChange.bind(this)
     this.handleRegister = this.handleRegister.bind(this)
     this.handleLoginButton = this.handleLoginButton.bind(this)
     this.handleUpdateForm = this.handleUpdateForm.bind(this)
@@ -133,7 +135,7 @@ class App extends Component {
     })
   }
 
-  async  authHandleChange(e) {
+  async  handleAuthChange(e) {
     e.preventDefault()
     const { name, value } = e.target;
     this.setState(prevState => (
@@ -160,7 +162,7 @@ class App extends Component {
           {this.state.currentUser
             ?
             <>
-              <Link to={`users/@username`}>
+              <Link to={`/users/:username`}>
                 <button id="buttonclick">Profile</button>
               </Link>
               <button id="buttonclick" onClick={this.handleLogout}>logout</button>
@@ -169,41 +171,47 @@ class App extends Component {
             <button id="buttonclick" className="log-reg-button" onClick={this.handleLoginButton}>Login/register</button>
           }
         </div>
-
-        <Route
-          exact path="/login"
-          render={(props) => (
-            <Login
-              handleLogin={this.handleLogin}
-              handleChange={this.authHandleChange}
-              formData={this.state.authFormData} />)} />
-        <Route
-          exact path="/register"
-          render={(props) => (
-            <Register
-              {...props}
-              handleRegister={this.handleRegister}
-              handleChange={this.authHandleChange}
-              currentUser={this.state.currentUser}
-              decodeToken={this.decodeToken}
-              formData={this.state.authFormData} />)} />
-        <Route
-          exact path='/users/:username'
-          render={(props) =>
-            <UserProfile
-              {...props}
-              currentUser={this.state.currentUser}
-              handleLogout={this.state.handleLogout}
-              deleteUser={this.deleteUser}
-              handleUpdateForm={this.handleUpdateForm}
-              handleUpdateSubmit={this.handleUpdateSubmit}
-              user={this.username}
-            />}
-        />
-        {/* <PlaySession /> */}
+        <div>
+          <Switch>
+            <Route
+              exact path="/login"
+              render={() => (
+                <Login
+                  handleLogin={this.handleLogin}
+                  handleChange={this.handleAuthChange}
+                  formData={this.state.authFormData} />)} />
+            <Route
+              exact path="/register"
+              render={(props) => (
+                <Register
+                  {...props}
+                  handleRegister={this.handleRegister}
+                  handleChange={this.handleAuthChange}
+                  currentUser={this.state.currentUser}
+                  decodeToken={this.decodeToken}
+                  formData={this.state.authFormData} />)} />
+            <Route
+              exact path='/users/:username'
+              render={(props) =>
+                <UserProfile
+                  {...props}
+                  currentUser={this.state.currentUser}
+                  handleLogout={this.state.handleLogout}
+                  deleteUser={this.deleteUser}
+                  handleUpdateForm={this.handleUpdateForm}
+                  handleUpdateSubmit={this.handleUpdateSubmit}
+                  user={this.username}
+                />}
+            />
+          </Switch>
+        </div>
       </div>
     )
   }
 }
+
+// App.propTypes = {
+
+// }
 
 export default withRouter(App);

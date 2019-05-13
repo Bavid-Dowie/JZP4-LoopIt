@@ -3,7 +3,12 @@ html {
 }
 
 p {
-  margin: .2em auto;
+  margin-top: 1.2em;
+  margin-bottom: 1em;
+}
+
+.make-noise-title {
+  margin-bottom: 3em;
 }
 
 .App {
@@ -19,22 +24,23 @@ p {
 
 button {
   transition: 1s;
-  font-family: 'Amatic SC', cursive;
+  font-family: 'Poiret One', cursive;
   font-size: 1em;
   text-align: center;
   border: 1px solid;
   box-shadow: 4px 4px 14px 4px #003c31;
   border-radius: .15em;
   height: 2em;
-  width: 6em;
-  background: #00896F;
-  color: white;
+  width: 7em;
+  background: #0063C0;
+  color: #e3f4f3;
   border: none;
   margin: 3%;
   padding: 10px;
-  --button-raise-level: 6px;
-  --button-hover-pressure: 1;
-  --transform-speed: 0.1s;
+  /* --button-default-height: 42px;
+  --button-raise-level: 3px;
+  --button-hover-pressure: 3;
+  --transform-speed: 0.2s; */
 }
 
 button:hover, button:focus {

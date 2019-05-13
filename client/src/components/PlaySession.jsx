@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ReactPlayer from 'react-player'
+// import ReactPlayer from 'react-player'
 import { withRouter } from 'react-router'
 
 // import './PlaySession.css'
@@ -8,7 +8,7 @@ class PlaySession extends Component {
   render() {
     return (
       <div className='react-player'>
-        <ReactPlayer
+        {/* <ReactPlayer
           url='https://www.youtube.com/watch?v=ysz5S6PUM-U'
           onPause
           width='50%'
@@ -23,7 +23,7 @@ class PlaySession extends Component {
               }
             }
           }}
-        />
+        /> */}
       </div>
     )
   }

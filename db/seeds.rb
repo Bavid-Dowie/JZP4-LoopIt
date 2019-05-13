@@ -9,43 +9,43 @@
 # Seed examples for User
 
 User.create!(
-    name: 'Professor Farnsworth', 
-    username: 'Fry', 
-    email: 'fry@fry.com', 
+    name: 'Professor Farnsworth',
+    username: 'fry',
+    email: 'fry@fry.com',
     password: 'password'
-  )
+)
 User.create!(
-    name: 'Bender Rodriguez', 
-    username: 'Bender', 
-    email: 'benderis@great.com', 
+    name: 'Bender Rodriguez',
+    username: 'fender',
+    email: 'benderis@great.com',
     password: 'password'
-  )
+)
 User.create!(
-    name: 'Turanga Leela', 
-    username: 'oneeye', 
-    email: 'one@eye.com', 
+    name: 'Turanga Leela',
+    username: 'oneeye',
+    email: 'one@eye.com',
     password: 'password'
-  )
+)
 User.create!(
-    name: 'Zoidberg', 
-    username: 'Zoidberg', 
-    email: 'zoid@berg.com', 
+    name: 'Zoidberg',
+    username: 'zoidberg',
+    email: 'zoid@berg.com',
     password: 'password'
-  )
+)
 User.create!(
-    name: 'Scruffy', 
-    username: 'Mmhmmm', 
-    email: 'yup@yup.com', 
+    name: 'Scruffy',
+    username: 'Mmhmmm',
+    email: 'yup@yup.com',
     password: 'password'
-  )
+)
 User.create!(
-    name: 'Nibbler', 
-    username: 'Stinky', 
-    email: 'dark@matter.com', 
+    name: 'Nibbler',
+    username: 'classkitten',
+    email: 'dark@matter.com',
     password: 'password'
-  )
-    
-# puts "#{User.count} users created!"
+)
+
+puts "#{User.count} users created!"
 
 #  Seed examples for Session
 
@@ -55,7 +55,7 @@ Session.create!(
     )
 Session.create!(
     title: 'test session2',
-    user_id: 1
+    user_id: 2
     )
 Session.create!(
     title: 'test session3',
@@ -63,7 +63,7 @@ Session.create!(
     )
 Session.create!(
     title: 'test session4',
-    user_id: 5
+    user_id: 4
     )
 Session.create!(
     title: 'test session5',
@@ -82,11 +82,11 @@ AudioFile.create!(
     )
 AudioFile.create!(
     filename: '2.wav',
-    session_id: 1
+    session_id: 2
     )
 AudioFile.create!(
     filename: '3.wav',
-    session_id: 1
+    session_id: 3
     )
 AudioFile.create!(
     filename: '4.wav',
